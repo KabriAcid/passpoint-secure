@@ -92,7 +92,7 @@ export default function Register() {
 
         {step === "points" && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-            <p className="text-sm text-muted-foreground text-center">Click 4 secret points on the image. Remember them!</p>
+            <p className="text-xs sm:text-sm text-muted-foreground text-center">Click 4 secret points on the image. Remember them!</p>
             <ClickImageCanvas
               imageSrc={PASSPOINT_IMAGES[imageId]}
               points={points}

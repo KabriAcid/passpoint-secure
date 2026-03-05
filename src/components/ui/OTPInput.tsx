@@ -1,4 +1,4 @@
-import { useRef, useState, KeyboardEvent } from "react";
+import { useRef, KeyboardEvent } from "react";
 import { motion } from "framer-motion";
 
 interface OTPInputProps {
@@ -48,7 +48,7 @@ export default function OTPInput({ length = 6, value, onChange }: OTPInputProps)
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}
           onFocus={(e) => e.target.select()}
-          className="w-11 h-13 text-center text-lg font-mono font-semibold rounded-xl bg-secondary border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/50 transition-all"
+          className="w-11 h-13 text-center text-lg font-mono font-semibold rounded-md bg-secondary border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/50 transition-all"
         />
       ))}
     </div>
