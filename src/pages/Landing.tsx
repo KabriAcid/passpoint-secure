@@ -39,9 +39,9 @@ export default function Landing() {
             Graphical Password Authentication
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight leading-tight">
-            Security beyond
+            Security Beyond
             <br />
-            <span className="text-gradient">passwords</span>
+            <span className="text-gradient">Passwords</span>
           </h1>
           <p className="text-muted-foreground mt-6 text-base sm:text-lg leading-relaxed max-w-lg mx-auto">
             PassPoint combines image-based authentication with OTP verification for a secure, intuitive login experience.

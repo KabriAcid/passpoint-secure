@@ -12,6 +12,29 @@ import { registerUser } from "@/services/authService";
 
 type Step = "info" | "image" | "points";
 
+type InfoFields = "username" | "email" | "phone";
+
+function validateInfoField(field: InfoFields, value: string): string {
+  switch (field) {
+    case "username":
+      if (!value.trim()) return "Username is required";
+      if (value.trim().length < 3) return "Username must be at least 3 characters";
+      if (value.trim().length > 20) return "Username must be 20 characters or fewer";
+      if (!/^[a-zA-Z0-9_]+$/.test(value.trim())) return "Only letters, numbers, and underscores allowed";
+      return "";
+    case "email":
+      if (!value.trim()) return "Email is required";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) return "Enter a valid email address";
+      return "";
+    case "phone":
+      if (!value.trim()) return "Phone number is required";
+      if (!/^(\+234|0)[789]\d{8}$/.test(value.trim())) return "Enter a valid Nigerian phone number (e.g. 08012345678 or +2348012345678)";
+      return "";
+    default:
+      return "";
+  }
+}
+
 export default function Register() {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>("info");
@@ -22,12 +45,34 @@ export default function Register() {
   const [points, setPoints] = useState<{ x: number; y: number }[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<InfoFields, string>>({ username: "", email: "", phone: "" });
+  const [touched, setTouched] = useState<Record<InfoFields, boolean>>({ username: false, email: false, phone: false });
+
+  const handleFieldChange = (field: InfoFields, value: string) => {
+    if (field === "username") setUsername(value);
+    if (field === "email") setEmail(value);
+    if (field === "phone") setPhone(value);
+    if (touched[field]) {
+      setFieldErrors((prev) => ({ ...prev, [field]: validateInfoField(field, value) }));
+    }
+  };
+
+  const handleFieldBlur = (field: InfoFields, value: string) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    setFieldErrors((prev) => ({ ...prev, [field]: validateInfoField(field, value) }));
+  };
 
   const handleInfoSubmit = () => {
-    if (!username || !email || !phone) {
-      setError("All fields are required");
-      return;
-    }
+    const values: Record<InfoFields, string> = { username, email, phone };
+    const allTouched = { username: true, email: true, phone: true };
+    const errors = {
+      username: validateInfoField("username", username),
+      email: validateInfoField("email", email),
+      phone: validateInfoField("phone", phone),
+    };
+    setTouched(allTouched);
+    setFieldErrors(errors);
+    if (Object.values(errors).some((e) => e)) return;
     setError("");
     setStep("image");
   };
@@ -73,9 +118,33 @@ export default function Register() {
 
         {step === "info" && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-            <InputField label="Username" placeholder="Choose a username" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <InputField label="Email" type="email" placeholder="you@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <InputField label="Phone" type="tel" placeholder="+1234567890" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <InputField
+              label="Username"
+              placeholder="Choose a username"
+              value={username}
+              onChange={(e) => handleFieldChange("username", e.target.value)}
+              onBlur={(e) => handleFieldBlur("username", e.target.value)}
+              error={fieldErrors.username}
+            />
+            <InputField
+              label="Email"
+              type="email"
+              placeholder="you@email.com"
+              value={email}
+              onChange={(e) => handleFieldChange("email", e.target.value)}
+              onBlur={(e) => handleFieldBlur("email", e.target.value)}
+              error={fieldErrors.email}
+            />
+            <InputField
+              label="Phone"
+              type="tel"
+              placeholder="08012345678 or +2348012345678"
+              value={phone}
+              maxLength={14}
+              onChange={(e) => handleFieldChange("phone", e.target.value)}
+              onBlur={(e) => handleFieldBlur("phone", e.target.value)}
+              error={fieldErrors.phone}
+            />
             <PrimaryButton onClick={handleInfoSubmit}>Continue</PrimaryButton>
           </motion.div>
         )}

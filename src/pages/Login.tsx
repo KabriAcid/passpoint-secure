@@ -7,19 +7,37 @@ import InputField from "@/components/ui/InputField";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { loginStep1 } from "@/services/authService";
 
+function validateUsername(value: string): string {
+  if (!value.trim()) return "Username is required";
+  if (value.trim().length < 3) return "Username must be at least 3 characters";
+  return "";
+}
+
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const registered = (location.state as any)?.registered;
   const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [touched, setTouched] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const handleUsernameChange = (value: string) => {
+    setUsername(value);
+    if (touched) setUsernameError(validateUsername(value));
+  };
+
+  const handleUsernameBlur = (value: string) => {
+    setTouched(true);
+    setUsernameError(validateUsername(value));
+  };
+
   const handleSubmit = () => {
-    if (!username) {
-      setError("Please enter your username");
-      return;
-    }
+    const err = validateUsername(username);
+    setTouched(true);
+    setUsernameError(err);
+    if (err) return;
     setLoading(true);
     setError("");
 
@@ -47,7 +65,15 @@ export default function Login() {
             {error}
           </motion.div>
         )}
-        <InputField label="Username" placeholder="Enter your username" value={username} onChange={(e) => setUsername(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSubmit()} />
+        <InputField
+          label="Username"
+          placeholder="Enter your username"
+          value={username}
+          onChange={(e) => handleUsernameChange(e.target.value)}
+          onBlur={(e) => handleUsernameBlur(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+          error={usernameError}
+        />
         <PrimaryButton onClick={handleSubmit} isLoading={loading}>Continue</PrimaryButton>
       </AuthCard>
       <p className="text-center text-sm text-muted-foreground mt-6">
