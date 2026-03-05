@@ -6,18 +6,50 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-*.sql
 
+# Dependencies
 node_modules
+
+# Frontend build output
 dist
 dist-ssr
 *.local
+
+# Backend build output
+server/dist
+backend/dist
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# JWT / secrets
+*.pem
+*.key
+*.cert
+
+# Uploads / user files
+uploads/
+public/uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj

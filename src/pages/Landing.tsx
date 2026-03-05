@@ -88,6 +88,13 @@ export default function Landing() {
           ))}
         </motion.div>
       </div>
+
+      {/* Footer */}
+      <div className="max-w-6xl mx-auto px-6 py-6 border-t border-border/40">
+        <p className="text-center text-xs text-muted-foreground/50">
+          &copy; {new Date().getFullYear()} Dreamerscode. All rights reserved.
+        </p>
+      </div>
     </div>
   );
 }
