@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Shield, ArrowRight, Lock, Fingerprint, Mail } from "lucide-react";
 import PrimaryButton from "@/components/ui/PrimaryButton";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function Landing() {
   return (
@@ -15,6 +16,7 @@ export default function Landing() {
           <span className="text-lg font-semibold tracking-tight text-foreground">PassPoint</span>
         </div>
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <Link to="/login">
             <PrimaryButton variant="ghost" className="w-auto px-4">Sign In</PrimaryButton>
           </Link>
@@ -36,12 +38,12 @@ export default function Landing() {
             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-glow" />
             Graphical Password Authentication
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight leading-tight">
             Security beyond
             <br />
             <span className="text-gradient">passwords</span>
           </h1>
-          <p className="text-muted-foreground mt-6 text-lg leading-relaxed max-w-lg mx-auto">
+          <p className="text-muted-foreground mt-6 text-base sm:text-lg leading-relaxed max-w-lg mx-auto">
             PassPoint combines image-based authentication with OTP verification for a secure, intuitive login experience.
           </p>
           <div className="flex items-center justify-center gap-3 mt-10">

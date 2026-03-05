@@ -45,7 +45,7 @@ export default function ClickImageCanvas({
     <div className="space-y-3">
       <div
         ref={containerRef}
-        className="relative rounded-xl overflow-hidden border border-border cursor-crosshair select-none"
+        className="relative rounded-xl overflow-hidden border border-border cursor-crosshair select-none transition-shadow duration-300 hover:shadow-lg hover:shadow-accent/10 hover:border-accent/30"
         onClick={handleClick}
       >
         <img
