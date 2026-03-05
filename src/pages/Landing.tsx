@@ -17,10 +17,10 @@ export default function Landing() {
         </div>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Link to="/login">
+          <Link to="/login" className="hidden sm:flex">
             <PrimaryButton variant="ghost" className="w-auto px-4">Sign In</PrimaryButton>
           </Link>
-          <Link to="/register">
+          <Link to="/register" className="hidden sm:flex">
             <PrimaryButton className="w-auto px-5">Get Started</PrimaryButton>
           </Link>
         </div>
