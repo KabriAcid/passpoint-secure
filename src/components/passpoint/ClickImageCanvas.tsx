@@ -87,7 +87,7 @@ export default function ClickImageCanvas({
           <button
             type="button"
             onClick={handleReset}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="text-xs text-red-500 font-bold hover:text-foreground transition-colors"
           >
             Reset
           </button>
