@@ -15,10 +15,10 @@ export default function Landing() {
           </div>
           <span className="text-lg font-semibold tracking-tight text-foreground">PassPoint</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
-          <Link to="/login" className="hidden sm:flex">
-            <PrimaryButton variant="ghost" className="w-auto px-4">Sign In</PrimaryButton>
+          <Link to="/login">
+            <PrimaryButton variant="ghost" className="w-auto px-3 sm:px-4 text-xs sm:text-sm">Sign In</PrimaryButton>
           </Link>
           <Link to="/register" className="hidden sm:flex">
             <PrimaryButton className="w-auto px-5">Get Started</PrimaryButton>
@@ -48,12 +48,12 @@ export default function Landing() {
           </p>
           <div className="flex items-center justify-center gap-3 mt-10">
             <Link to="/register">
-              <PrimaryButton className="w-auto px-8">
+              <PrimaryButton className="w-auto px-5 sm:px-8 btn-shimmer">
                 Create Account <ArrowRight className="w-4 h-4" />
               </PrimaryButton>
             </Link>
             <Link to="/login">
-              <PrimaryButton variant="secondary" className="w-auto px-8">
+              <PrimaryButton variant="secondary" className="w-auto px-5 sm:px-8">
                 Sign In
               </PrimaryButton>
             </Link>
